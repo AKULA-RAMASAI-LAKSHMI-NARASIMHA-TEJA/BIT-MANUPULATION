@@ -1,0 +1,16 @@
+class Solution {
+    public int minOperations(int[] nums, int k) {
+        int xor=0;
+        for(int i:nums) xor^=i;
+        int ans=0;
+        if(xor==k) return ans;
+        int x[]=new int[32];
+        for(int i=0; i<32; i++) if((xor&(1<<i))>0) x[i]=1;
+        int a[]=new int[32];
+        for(int i=0; i<32; i++) if((k&(1<<i))>0) a[i]=1;
+        int l=Integer.toBinaryString(k).length();
+        for(int i=0; i<l; i++) if(a[i]!=x[i]) ans++;
+        for(int i=l; i<32; i++) if(x[i]==1) ans++;
+        return ans;
+    }
+}
